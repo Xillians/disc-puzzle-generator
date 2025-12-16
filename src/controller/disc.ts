@@ -2,8 +2,7 @@
  * Individual stone disc mechanics and positioning
  */
 
-import type { StoneSymbol, StoneType, DiscPosition } from './types.js';
-import { PositionMapper } from './position-mapper.js';
+import type { StoneSymbol, StoneType } from './types.js';
 
 /**
  * Represents a single stone disc for the puzzle
@@ -29,6 +28,58 @@ export class Disc {
   getCurrentSymbol(): StoneSymbol | undefined {
     return this.symbols[this.currentRotation];
   }
+
+  /**
+   * MATHEMATICAL POSITIONING: Set symbol to target position using index calculations
+   * This is the core mathematical method that replaces setToPosition/setToTop
+   */
+  setSymbolToPosition(symbolId: string, targetPosition: number): boolean {
+    const symbolIndex = this.symbols.findIndex(s => s.id === symbolId);
+    if (symbolIndex === -1) return false;
+
+    // Mathematical formula: currentRotation = (symbolIndex - targetPosition + discSize) % discSize
+    this.currentRotation = (symbolIndex - targetPosition + this.symbols.length) % this.symbols.length;
+    return true;
+  }
+
+  /**
+   * MATHEMATICAL POSITIONING: Get the current position of a symbol
+   * Returns the mathematical position (0-5 for cavernstone, 0-3 for others)
+   */
+  getSymbolPosition(symbolId: string): number | null {
+    const symbolIndex = this.symbols.findIndex(s => s.id === symbolId);
+    if (symbolIndex === -1) return null;
+
+    // Calculate actual position: (symbolIndex - currentRotation + discSize) % discSize
+    return (symbolIndex - this.currentRotation + this.symbols.length) % this.symbols.length;
+  }
+
+  /**
+   * MATHEMATICAL POSITIONING: Check if a symbol is at the specified position
+   */
+  isSymbolAtPosition(symbolId: string, targetPosition: number): boolean {
+    const currentPosition = this.getSymbolPosition(symbolId);
+    return currentPosition === targetPosition;
+  }
+
+  /**
+   * MATHEMATICAL POSITIONING: Get the symbol currently at a specific position
+   */
+  getSymbolAtPosition(targetPosition: number): StoneSymbol | undefined {
+    const symbolIndex = (this.currentRotation + targetPosition) % this.symbols.length;
+    return this.symbols[symbolIndex];
+  }
+
+  /**
+   * MATHEMATICAL POSITIONING: Calculate rotation needed to place symbol at target position
+   * This doesn't apply the rotation, just calculates what's needed
+   */
+  calculateRotationForPosition(symbolId: string, targetPosition: number): number | null {
+    const symbolIndex = this.symbols.findIndex(s => s.id === symbolId);
+    if (symbolIndex === -1) return null;
+
+    return (symbolIndex - targetPosition + this.symbols.length) % this.symbols.length;
+  }
   
   /**
    * Rotate the disc by a number of positions
@@ -44,65 +95,5 @@ export class Disc {
    */
   rotate(positions: number = 1): void {
     this.currentRotation = (this.currentRotation + positions) % this.symbols.length;
-  }
-  
-  /**
-   * EXPLICITLY set a symbol to the TOP position (12 o'clock, above the horn)
-   * This is purely mechanical - it does NOT consider puzzle alignment rules
-   */
-  setToTop(symbolId: string): boolean {
-    const index = this.symbols.findIndex(s => s.id === symbolId);
-    if (index !== -1) {
-      this.currentRotation = index;
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * Set a symbol to a specific position on the disc (for cavernstone positioning)
-   */
-  setToPosition(symbolId: string, position: DiscPosition): boolean {
-    const symbolIndex = this.symbols.findIndex(s => s.id === symbolId);
-    if (symbolIndex === -1) return false;
-
-    const targetPositionIndex = PositionMapper.getPositionIndex(position);
-    
-    // To put symbolIndex at targetPositionIndex:
-    // currentRotation + targetPositionIndex should equal symbolIndex (mod length)
-    // So: currentRotation = symbolIndex - targetPositionIndex (mod length)
-    this.currentRotation = (symbolIndex - targetPositionIndex + this.symbols.length) % this.symbols.length;
-    return true;
-  }
-
-  /**
-   * Get which symbol is currently at a specific position
-   */
-  getSymbolAtPosition(position: DiscPosition): StoneSymbol | undefined {
-    const targetIndex = PositionMapper.getPositionIndex(position);
-    const symbolIndex = (this.currentRotation + targetIndex) % this.symbols.length;
-    return this.symbols[symbolIndex];
-  }
-
-  /**
-   * Get the position of a specific symbol on the current disc state
-   */
-  getPositionOfSymbol(symbolId: string): DiscPosition | null {
-    const symbolIndex = this.symbols.findIndex(s => s.id === symbolId);
-    if (symbolIndex === -1) return null;
-
-    // Calculate where this symbol currently appears relative to current rotation
-    const currentPosition = (symbolIndex - this.currentRotation + this.symbols.length) % this.symbols.length;
-    return PositionMapper.getPositionFromIndex(currentPosition);
-  }
-
-  /**
-   * Get the symbol that appears opposite to the current one (for circular discs)
-   */
-  getOppositeSymbol(): StoneSymbol | null {
-    if (this.symbols.length % 2 !== 0) return null; // Can't have opposite on odd number of symbols
-    const oppositeIndex = (this.currentRotation + this.symbols.length / 2) % this.symbols.length;
-    const opposite = this.symbols[oppositeIndex];
-    return opposite ?? null;
   }
 }

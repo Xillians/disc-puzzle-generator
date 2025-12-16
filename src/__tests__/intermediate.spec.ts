@@ -1,5 +1,5 @@
 import { describe, test } from "vitest";
-import { PuzzleFactory } from "../controller/index.js";
+import { PuzzleFactory } from "../controller/puzzle-factory.js";
 
 
 describe("intermediate test", () => {
@@ -86,7 +86,7 @@ describe("intermediate test", () => {
       }
     }
     if (!solved) {
-      test.fails("Expected to find a solution by brute force rotation");
+      throw new Error("Expected to find a solution by brute force rotation");
     }
   });
   test("Clues correspond to solution", () => {

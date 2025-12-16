@@ -1,5 +1,5 @@
 import { describe, test } from "vitest";
-import { PuzzleFactory } from "../controller/index.js";
+import { PuzzleFactory } from "../controller/puzzle-factory.js";
 
 describe("Full test", () => {
   test("Cavernheart, God, and World stones", () => {
@@ -17,12 +17,12 @@ describe("Full test", () => {
 
     puzzle.applySolution();
     if (!puzzle.isSolved()) {
-      test.fails("Expected the puzzle to be solved after applying the solution");
+      throw new Error("Expected the puzzle to be solved after applying the solution");
     }
 
     const isSolved = puzzle.isSolved();
     if (!isSolved) {
-      test.fails("Expected the puzzle to be solved");
+      throw new Error("Expected the puzzle to be solved");
     }
   });
   test("Disc rotation works", () => {
@@ -104,7 +104,7 @@ describe("Full test", () => {
       }
     }
     if (!solved) {
-      test.fails("Expected to find a solution by brute force rotation");
+      throw new Error("Expected to find a solution by brute force rotation");
     }
   });
   test("Get clues for solution", () => {

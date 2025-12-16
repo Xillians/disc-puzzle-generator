@@ -1,5 +1,5 @@
 import { describe, test } from "vitest";
-import { PuzzleFactory } from "../controller/index.js";
+import { PuzzleFactory } from "../controller/puzzle-factory.js";
 
 
 describe("basic test", () => {
