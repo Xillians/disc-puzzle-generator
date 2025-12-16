@@ -17,5 +17,8 @@ export type {
   StoneData, 
   OrientationData, 
   DiscPosition, 
-  StoneType 
+  StoneType,
+  Cavernstone,
+  Godstone,
+  Worldstone
 } from './types.js';

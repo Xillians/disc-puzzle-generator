@@ -38,3 +38,27 @@ export interface OrientationData {
 
 // Common stone types used throughout the system
 export type StoneType = 'cavernstone' | 'godstone' | 'worldstone';
+
+// enum for cavernstone positions
+export enum Cavernstone {
+  life = 'resonance_life',
+  water = 'resonance_water',
+  stone = 'resonance_stone',
+  light = 'resonance_light',
+  thunder = 'resonance_thunder',
+  growth = 'resonance_growth',
+}
+
+export enum Godstone {
+  desna = 'desna',
+  zevgavizeb = 'zevgavizeb',
+  apsu = 'apsu',
+  firstOnes = 'first_ones',
+}
+
+export enum Worldstone {
+  garden = 'verdant_garden',
+  wastes = 'blighted_wastes',
+  springs = 'deep_springs',
+  veins = 'molten_veins',
+}
