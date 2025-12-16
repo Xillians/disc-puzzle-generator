@@ -32,8 +32,17 @@ export class Disc {
   
   /**
    * Rotate the disc by a number of positions
+   * @param positions Number of positions to rotate (default: 1)
+   * 
+   * Examples:
+   * ```ts
+   * // Rotate by 1 position (default)
+   * disc.rotate();
+   * // Rotate by 3 positions
+   * disc.rotate(3);
+   * ```
    */
-  rotate(positions: number): void {
+  rotate(positions: number = 1): void {
     this.currentRotation = (this.currentRotation + positions) % this.symbols.length;
   }
   
@@ -95,13 +104,5 @@ export class Disc {
     const oppositeIndex = (this.currentRotation + this.symbols.length / 2) % this.symbols.length;
     const opposite = this.symbols[oppositeIndex];
     return opposite ?? null;
-  }
-
-  /**
-   * @deprecated Use setToTop() instead for clarity
-   */
-  setToSymbol(symbolId: string): boolean {
-    console.warn('setToSymbol is deprecated. Use setToTop() for clarity about positioning.');
-    return this.setToTop(symbolId);
   }
 }
