@@ -139,53 +139,81 @@ export class StonePuzzle {
   
   /**
    * Apply the solution using integrated mathematical positioning
-   * This uses the target_position data directly from orientations.json with proper cross-disc logic
+   * This uses proper cross-disc relative positioning logic
    */
   applySolution(): void {
+    // Apply cavernstone first (it's the foundation)
     for (const [stoneType, symbolId] of this.solution) {
-      const disc = this.discs.get(stoneType);
-      if (!symbolId || !stoneType) continue;
-      if (!disc) continue;
-      const symbol = this.findSymbolById(stoneType, symbolId);
-      if (!symbol || !symbol.orientations || symbol.orientations.length === 0) continue;
-      const solution = this.solution.get(stoneType);
-      if (!solution) continue;
+      if (stoneType === 'cavernstone') {
+        const disc = this.discs.get(stoneType);
+        if (!disc) continue;
+        const symbol = this.findSymbolById(stoneType, symbolId);
+        if (!symbol || !symbol.orientations || symbol.orientations.length === 0) continue;
 
-      const targetPosition = this.getTargetPositionForStoneType(stoneType, symbol, solution);
-      if (typeof targetPosition === 'number') {
-        disc.setSymbolToPosition(symbolId, targetPosition);
+        const targetPosition = symbol.orientations[0]?.target_position;
+        if (typeof targetPosition === 'number') {
+          disc.setSymbolToPosition(symbolId, targetPosition);
+        }
+      }
+    }
+
+    // Apply godstone relative to cavernstone position
+    for (const [stoneType, symbolId] of this.solution) {
+      if (stoneType === 'godstone') {
+        const disc = this.discs.get(stoneType);
+        const cavernDisc = this.discs.get('cavernstone');
+        if (!disc || !cavernDisc) continue;
+        
+        const symbol = this.findSymbolById(stoneType, symbolId);
+        if (!symbol || !symbol.orientations || symbol.orientations.length === 0) continue;
+
+        const currentCavernstone = this.solution.get('cavernstone');
+        const targetOrientation = symbol.orientations.find(orientation => 
+          this.doesOrientationMatchSymbol(orientation.solution, currentCavernstone)
+        );
+
+        if (targetOrientation && typeof targetOrientation.target_position === 'number') {
+          // Get current position of cavernstone symbol
+          const cavernPosition = cavernDisc.getSymbolPosition(currentCavernstone || '');
+          if (cavernPosition !== null) {
+            // Map cavernstone position to godstone position (6 positions -> 4 positions)
+            const mappedPosition = Math.round((cavernPosition * disc.symbols.length) / cavernDisc.symbols.length) % disc.symbols.length;
+            disc.setSymbolToPosition(symbolId, mappedPosition);
+          }
+        }
+      }
+    }
+
+    // Apply worldstone relative to godstone position
+    for (const [stoneType, symbolId] of this.solution) {
+      if (stoneType === 'worldstone') {
+        const disc = this.discs.get(stoneType);
+        const godDisc = this.discs.get('godstone');
+        if (!disc || !godDisc) continue;
+        
+        const symbol = this.findSymbolById(stoneType, symbolId);
+        if (!symbol || !symbol.orientations || symbol.orientations.length === 0) continue;
+
+        const currentGodstone = this.solution.get('godstone');
+        const targetOrientation = symbol.orientations.find(orientation => 
+          this.doesOrientationMatchSymbol(orientation.solution, currentGodstone)
+        );
+
+        if (targetOrientation && typeof targetOrientation.target_position === 'number') {
+          // Get current position of godstone symbol
+          const godPosition = godDisc.getSymbolPosition(currentGodstone || '');
+          if (godPosition !== null) {
+            // Map godstone position to worldstone position (4 positions -> 4 positions, but could be different)
+            const mappedPosition = Math.round((godPosition * disc.symbols.length) / godDisc.symbols.length) % disc.symbols.length;
+            disc.setSymbolToPosition(symbolId, mappedPosition);
+          }
+        }
       }
     }
   }
-  private getTargetPositionForStoneType(stoneType: string, symbol: StoneSymbol, solution: string): number | undefined {
-    if (!symbol.orientations || symbol.orientations.length === 0) return undefined;
-
-    let targetOrientation: Clue | undefined;
-
-    if (stoneType === 'cavernstone') {
-      // Cavernstone: any orientation (they share the same target_position)
-      targetOrientation = symbol.orientations[0];
-    } else if (stoneType === 'godstone') {
-      // Godstone: choose orientation that matches the current cavernstone solution, fallback to first
-      targetOrientation = symbol.orientations.find(orientation =>
-        this.doesOrientationMatchSymbol(orientation.solution, solution)
-      ) || symbol.orientations[0];
-    } else if (stoneType === 'worldstone') {
-      // Worldstone: choose orientation that matches the current godstone solution, fallback to first
-      targetOrientation = symbol.orientations.find(orientation =>
-        this.doesOrientationMatchSymbol(orientation.solution, solution)
-      ) || symbol.orientations[0];
-    }
-
-    if (targetOrientation && typeof targetOrientation.target_position === 'number') {
-      return targetOrientation.target_position;
-    }
-
-    return undefined;
-  }
 
   /**
-   * Check if puzzle is solved by validating mathematical positioning with proper cross-disc logic
+   * Check if puzzle is solved by validating relative positioning with proper cross-disc logic
    */
   isSolved(): boolean {
     for (const [stoneType, symbolId] of this.solution) {
@@ -195,32 +223,58 @@ export class StonePuzzle {
       const symbol = this.findSymbolById(stoneType, symbolId);
       if (!symbol || !symbol.orientations || symbol.orientations.length === 0) return false;
 
-      let targetOrientation;
-
       if (stoneType === 'cavernstone') {
-        // Cavernstone: Use any orientation (they all have same target_position)
-        targetOrientation = symbol.orientations[0];
+        // Cavernstone: Check if symbol is at its absolute target position
+        const targetOrientation = symbol.orientations[0];
+        if (targetOrientation && typeof targetOrientation.target_position === 'number') {
+          if (!disc.isSymbolAtPosition(symbolId, targetOrientation.target_position)) {
+            return false;
+          }
+        }
       } else if (stoneType === 'godstone') {
-        // Godstone: Find orientation that matches current cavernstone
+        // Godstone: Check if positioned relative to cavernstone
+        const cavernDisc = this.discs.get('cavernstone');
+        if (!cavernDisc) return false;
+
         const currentCavernstone = this.solution.get('cavernstone');
-        targetOrientation = symbol.orientations.find(orientation => 
+        const targetOrientation = symbol.orientations.find(orientation => 
           this.doesOrientationMatchSymbol(orientation.solution, currentCavernstone)
         );
-      } else if (stoneType === 'worldstone') {
-        // Worldstone: Find orientation that matches current godstone
-        const currentGodstone = this.solution.get('godstone');
-        targetOrientation = symbol.orientations.find(orientation => 
-          this.doesOrientationMatchSymbol(orientation.solution, currentGodstone)
-        );
-      }
 
-      if (targetOrientation && typeof targetOrientation.target_position === 'number') {
-        if (!disc.isSymbolAtPosition(symbolId, targetOrientation.target_position)) {
+        if (targetOrientation && typeof targetOrientation.target_position === 'number') {
+          const cavernPosition = cavernDisc.getSymbolPosition(currentCavernstone || '');
+          if (cavernPosition === null) return false;
+          
+          // Map cavernstone position to godstone position space
+          const mappedPosition = Math.round((cavernPosition * disc.symbols.length) / cavernDisc.symbols.length) % disc.symbols.length;
+          if (!disc.isSymbolAtPosition(symbolId, mappedPosition)) {
+            return false;
+          }
+        } else {
           return false;
         }
-      } else {
-        // If no matching orientation found, puzzle is not solved correctly
-        return false;
+      } else if (stoneType === 'worldstone') {
+        // Worldstone: Check if positioned relative to godstone
+        const godDisc = this.discs.get('godstone');
+        if (!godDisc) return false;
+
+        const currentGodstone = this.solution.get('godstone');
+        const targetOrientation = symbol.orientations.find(orientation => 
+          this.doesOrientationMatchSymbol(orientation.solution, currentGodstone)
+        );
+
+        if (targetOrientation && typeof targetOrientation.target_position === 'number') {
+          const godPosition = godDisc.getSymbolPosition(currentGodstone || '');
+          if (godPosition === null) return false;
+          
+          // Map godstone position to worldstone position space
+          const mappedPosition = Math.round((godPosition * disc.symbols.length) / godDisc.symbols.length) % disc.symbols.length;
+          if (!disc.isSymbolAtPosition(symbolId, mappedPosition)) {
+            return false;
+          }
+        } else {
+          return false;
+        }
       }
     }
     return true;
