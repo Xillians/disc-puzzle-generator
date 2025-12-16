@@ -1,15 +1,16 @@
 import logger from './utils/logger.js';
 import { PuzzleFactory } from './controller/puzzle-factory.js';
+import type { StoneType } from './controller/types.js';
 
 
 function main() {
   const puzzle = PuzzleFactory.createFullPuzzle();
   const solution = puzzle.getSolution();
   logger.info({ state: puzzle.getState(), solution }, "Initial puzzle state and solution");
-  const discs = ['cavernstone', 'godstone', 'worldstone'];
+  const discs: StoneType[] = ['cavernstone', 'godstone', 'worldstone'];
 
   for (const discType of discs) {
-    const disc = puzzle.getDisc(discType as 'cavernstone' | 'godstone' | 'worldstone');
+    const disc = puzzle.getDisc(discType as StoneType);
     if (disc) {
       logger.info({ state: puzzle.getState() }, `Current state before rotating ${discType}`);
       disc.rotate(1);
