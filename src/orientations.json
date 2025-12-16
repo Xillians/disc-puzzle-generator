@@ -1,0 +1,435 @@
+{
+  "horn": {
+    "description": "Top-of-spindle alignment marker. Use the horn to set reference orientation for all stones.",
+    "sample_clues": [
+      "At the top of the spindle is a horn symbol, which is used to align the stones."
+    ]
+  },
+  "cavernstone": {
+    "note": "Primary resonance disc. The six Cavern Hearts' powers determine the foundational alignments around the horn marker.",
+    "symbols": [
+      {
+        "id": "resonance_life",
+        "label": "Resonance of Life",
+        "orientations": [
+          {
+            "clue": "Life's essence flows beneath the horned marker",
+            "solution": "Place the resonance of life beneath the tall horns"
+          },
+          {
+            "clue": "The pulse of vitality anchors below the spindle's crown",
+            "solution": "Place the resonance of life beneath the tall horns"
+          },
+          {
+            "clue": "Beneath the horn, life's resonance takes root",
+            "solution": "Place the resonance of life beneath the tall horns"
+          }
+        ]
+      },
+      {
+        "id": "resonance_water",
+        "label": "Resonance of Water",
+        "orientations": [
+          {
+            "clue": "Waters gather where the horn points skyward",
+            "solution": "Place the resonance of water above the tall horns"
+          },
+          {
+            "clue": "The flow of the depths rises above the marker",
+            "solution": "Place the resonance of water above the tall horns"
+          },
+          {
+            "clue": "Above the horn, water's essence pools",
+            "solution": "Place the resonance of water above the tall horns"
+          }
+        ]
+      },
+      {
+        "id": "resonance_stone",
+        "label": "Resonance of Stone",
+        "orientations": [
+          {
+            "clue": "Stone's strength guards the horn's back",
+            "solution": "Place the resonance of stone behind the tall horns"
+          },
+          {
+            "clue": "The mountain's power stands behind the spindle",
+            "solution": "Place the resonance of stone behind the tall horns"
+          },
+          {
+            "clue": "Beyond the horn, stone's resonance endures",
+            "solution": "Place the resonance of stone behind the tall horns"
+          }
+        ]
+      },
+      {
+        "id": "resonance_light",
+        "label": "Resonance of Light",
+        "orientations": [
+          {
+            "clue": "Light blazes before the horned marker",
+            "solution": "Place the resonance of light in front of the tall horns"
+          },
+          {
+            "clue": "Illumination spreads from the horn's face",
+            "solution": "Place the resonance of light in front of the tall horns"
+          },
+          {
+            "clue": "In front of the horn, light's power shines",
+            "solution": "Place the resonance of light in front of the tall horns"
+          }
+        ]
+      },
+      {
+        "id": "resonance_thunder",
+        "label": "Resonance of Thunder",
+        "orientations": [
+          {
+            "clue": "Thunder echoes from the horn's left reach",
+            "solution": "Place the resonance of thunder left of the tall horns"
+          },
+          {
+            "clue": "The storm's voice calls from beside the marker",
+            "solution": "Place the resonance of thunder left of the tall horns"
+          },
+          {
+            "clue": "To the left of the horn, thunder's power rumbles",
+            "solution": "Place the resonance of thunder left of the tall horns"
+          }
+        ]
+      },
+      {
+        "id": "resonance_growth",
+        "label": "Resonance of Growth",
+        "orientations": [
+          {
+            "clue": "Growth flourishes at the horn's right hand",
+            "solution": "Place the resonance of growth right of the tall horns"
+          },
+          {
+            "clue": "Nature's power spreads from the marker's side",
+            "solution": "Place the resonance of growth right of the tall horns"
+          },
+          {
+            "clue": "To the right of the horn, growth's essence blooms",
+            "solution": "Place the resonance of growth right of the tall horns"
+          }
+        ]
+      }
+    ]
+  },
+  "godstone": {
+    "note": "Ancient Xulgath theological disc. The four primordial powers they revered must be aligned with the cavern heart resonances.",
+    "symbols": [
+      {
+        "id": "first_ones",
+        "label": "The First Ones",
+        "orientations": [
+          {
+            "clue": "The First Ones breathed life into the void",
+            "solution": "Align the First Ones with the resonance of life"
+          },
+          {
+            "clue": "Primordial waters flow from the First Ones' realm",
+            "solution": "Align the First Ones with the resonance of water"
+          },
+          {
+            "clue": "The First Ones carved reality from primal stone",
+            "solution": "Align the First Ones with the resonance of stone"
+          },
+          {
+            "clue": "The First Ones kindled light in endless darkness",
+            "solution": "Align the First Ones with the resonance of light"
+          },
+          {
+            "clue": "The First Ones' voices thunder across creation",
+            "solution": "Align the First Ones with the resonance of thunder"
+          },
+          {
+            "clue": "From the First Ones springs all growth and change",
+            "solution": "Align the First Ones with the resonance of growth"
+          }
+        ]
+      },
+      {
+        "id": "zevgavizeb",
+        "label": "Zevgavizeb",
+        "orientations": [
+          {
+            "clue": "The Ravenous King devours life to feed his hunger",
+            "solution": "Align Zevgavizeb with the resonance of life"
+          },
+          {
+            "clue": "Zevgavizeb's thirst drains the deepest waters",
+            "solution": "Align Zevgavizeb with the resonance of water"
+          },
+          {
+            "clue": "The Hungry God gnaws through solid stone",
+            "solution": "Align Zevgavizeb with the resonance of stone"
+          },
+          {
+            "clue": "Zevgavizeb's maw swallows even light itself",
+            "solution": "Align Zevgavizeb with the resonance of light"
+          },
+          {
+            "clue": "The Ravenous King's roar echoes like thunder",
+            "solution": "Align Zevgavizeb with the resonance of thunder"
+          },
+          {
+            "clue": "From Zevgavizeb's hunger comes twisted growth",
+            "solution": "Align Zevgavizeb with the resonance of growth"
+          }
+        ]
+      },
+      {
+        "id": "apsu",
+        "label": "Apsu",
+        "orientations": [
+          {
+            "clue": "Apsu's breath grants life to the worthy",
+            "solution": "Align Apsu with the resonance of life"
+          },
+          {
+            "clue": "The Waybringer's tears become sacred waters",
+            "solution": "Align Apsu with the resonance of water"
+          },
+          {
+            "clue": "Apsu's claws shape mountains from stone",
+            "solution": "Align Apsu with the resonance of stone"
+          },
+          {
+            "clue": "The First Dragon's eyes blaze with ancient light",
+            "solution": "Align Apsu with the resonance of light"
+          },
+          {
+            "clue": "Apsu's wingbeats thunder across the sky",
+            "solution": "Align Apsu with the resonance of thunder"
+          },
+          {
+            "clue": "Where Apsu treads, freedom and growth flourish",
+            "solution": "Align Apsu with the resonance of growth"
+          }
+        ]
+      },
+      {
+        "id": "desna",
+        "label": "Desna",
+        "orientations": [
+          {
+            "clue": "Desna guides life through dream and vision",
+            "solution": "Align Desna with the resonance of life"
+          },
+          {
+            "clue": "The Song of Spheres flows like celestial water",
+            "solution": "Align Desna with the resonance of water"
+          },
+          {
+            "clue": "Desna's dreams turn stone to stardust",
+            "solution": "Align Desna with the resonance of stone"
+          },
+          {
+            "clue": "The Dreamer's touch ignites starlight",
+            "solution": "Align Desna with the resonance of light"
+          },
+          {
+            "clue": "Desna's laughter rings like cosmic thunder",
+            "solution": "Align Desna with the resonance of thunder"
+          },
+          {
+            "clue": "In Desna's dreams, all things grow toward wonder",
+            "solution": "Align Desna with the resonance of growth"
+          }
+        ]
+      }
+    ]
+  },
+  "worldstone": {
+    "note": "Worldstone alignments reference either the cavernstone or godstone orientation. This stone tells the story of Vask - what was, what is, and what endures.",
+    "symbols": [
+      {
+        "id": "verdant_garden",
+        "label": "The Verdant Garden",
+        "orientations": [
+          {
+            "clue": "Where life's essence flows, the garden blooms eternal",
+            "solution": "Align the Verdant Garden with the resonance of life"
+          },
+          {
+            "clue": "Sacred waters nourish the ancient groves",
+            "solution": "Align the Verdant Garden with the resonance of water"
+          },
+          {
+            "clue": "Gardens root deep in stone's foundation",
+            "solution": "Align the Verdant Garden with the resonance of stone"
+          },
+          {
+            "clue": "In light's embrace, the garden finds its glory",
+            "solution": "Align the Verdant Garden with the resonance of light"
+          },
+          {
+            "clue": "Thunder's voice calls growth from slumber",
+            "solution": "Align the Verdant Garden with the resonance of thunder"
+          },
+          {
+            "clue": "The garden answers growth's eternal call",
+            "solution": "Align the Verdant Garden with the resonance of growth"
+          },
+          {
+            "clue": "The First Ones planted seeds in paradise",
+            "solution": "Align the Verdant Garden with the First Ones"
+          },
+          {
+            "clue": "Zevgavizeb devours even paradise",
+            "solution": "Align the Verdant Garden with Zevgavizeb"
+          },
+          {
+            "clue": "Apsu's breath gives life to the garden",
+            "solution": "Align the Verdant Garden with Apsu"
+          },
+          {
+            "clue": "In Desna's dreams, gardens grow beyond measure",
+            "solution": "Align the Verdant Garden with Desna"
+          }
+        ]
+      },
+      {
+        "id": "blighted_wastes",
+        "label": "The Blighted Wastes",
+        "orientations": [
+          {
+            "clue": "Where life withers, the wastes claim dominion",
+            "solution": "Align the Blighted Wastes with the resonance of life"
+          },
+          {
+            "clue": "Poisoned waters birth the crystal desert",
+            "solution": "Align the Blighted Wastes with the resonance of water"
+          },
+          {
+            "clue": "Black stone remembers better days",
+            "solution": "Align the Blighted Wastes with the resonance of stone"
+          },
+          {
+            "clue": "False light glitters in crystal death",
+            "solution": "Align the Blighted Wastes with the resonance of light"
+          },
+          {
+            "clue": "Silent thunder echoes in empty lands",
+            "solution": "Align the Blighted Wastes with the resonance of thunder"
+          },
+          {
+            "clue": "Where growth once flourished, only waste remains",
+            "solution": "Align the Blighted Wastes with the resonance of growth"
+          },
+          {
+            "clue": "The First Ones weep for what was lost",
+            "solution": "Align the Blighted Wastes with the First Ones"
+          },
+          {
+            "clue": "Zevgavizeb feasts on civilization's bones",
+            "solution": "Align the Blighted Wastes with Zevgavizeb"
+          },
+          {
+            "clue": "Even Apsu's tears cannot heal this wound",
+            "solution": "Align the Blighted Wastes with Apsu"
+          },
+          {
+            "clue": "Desna's nightmares birth the crystal stars",
+            "solution": "Align the Blighted Wastes with Desna"
+          }
+        ]
+      },
+      {
+        "id": "deep_springs",
+        "label": "The Deep Springs",
+        "orientations": [
+          {
+            "clue": "From deep springs flows the essence of life",
+            "solution": "Align the Deep Springs with the resonance of life"
+          },
+          {
+            "clue": "The springs hold water's purest form",
+            "solution": "Align the Deep Springs with the resonance of water"
+          },
+          {
+            "clue": "Springs carve their paths through ancient stone",
+            "solution": "Align the Deep Springs with the resonance of stone"
+          },
+          {
+            "clue": "Where springs flow, light reflects eternal",
+            "solution": "Align the Deep Springs with the resonance of light"
+          },
+          {
+            "clue": "Thunder's voice echoes in the deep wells",
+            "solution": "Align the Deep Springs with the resonance of thunder"
+          },
+          {
+            "clue": "Springs nurture growth in hidden places",
+            "solution": "Align the Deep Springs with the resonance of growth"
+          },
+          {
+            "clue": "The First Ones blessed the sacred wells",
+            "solution": "Align the Deep Springs with the First Ones"
+          },
+          {
+            "clue": "Zevgavizeb thirsts for the pure waters",
+            "solution": "Align the Deep Springs with Zevgavizeb"
+          },
+          {
+            "clue": "Apsu's tears become the healing springs",
+            "solution": "Align the Deep Springs with Apsu"
+          },
+          {
+            "clue": "Desna guides travelers to hidden waters",
+            "solution": "Align the Deep Springs with Desna"
+          }
+        ]
+      },
+      {
+        "id": "molten_veins",
+        "label": "The Molten Veins",
+        "orientations": [
+          {
+            "clue": "Molten veins pulse with earth's life force",
+            "solution": "Align the Molten Veins with the resonance of life"
+          },
+          {
+            "clue": "Where fire and water meet, steam rises",
+            "solution": "Align the Molten Veins with the resonance of water"
+          },
+          {
+            "clue": "The veins run deep through foundation stone",
+            "solution": "Align the Molten Veins with the resonance of stone"
+          },
+          {
+            "clue": "Molten light blazes in earth's heart",
+            "solution": "Align the Molten Veins with the resonance of light"
+          },
+          {
+            "clue": "The veins roar like underground thunder",
+            "solution": "Align the Molten Veins with the resonance of thunder"
+          },
+          {
+            "clue": "From molten soil springs harsh growth",
+            "solution": "Align the Molten Veins with the resonance of growth"
+          },
+          {
+            "clue": "The First Ones forged the world's veins",
+            "solution": "Align the Molten Veins with the First Ones"
+          },
+          {
+            "clue": "Zevgavizeb's hunger burns like molten stone",
+            "solution": "Align the Molten Veins with Zevgavizeb"
+          },
+          {
+            "clue": "Apsu's fire flows through earth's arteries",
+            "solution": "Align the Molten Veins with Apsu"
+          },
+          {
+            "clue": "Desna's dreams melt the hardest stone",
+            "solution": "Align the Molten Veins with Desna"
+          }
+        ]
+      }
+    ]
+  }
+}
