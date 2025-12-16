@@ -2,7 +2,7 @@
  * Factory for creating different types of stone puzzles
  */
 
-import type { StoneType } from './types.js';
+import type { Cavernstone, Godstone, StoneType, Worldstone } from './types.js';
 import { StonePuzzle } from './puzzle.js';
 
 /**
@@ -50,10 +50,21 @@ export class PuzzleFactory {
   
   /**
    * Create a puzzle with a specific configuration
+   * @param stones Array of stone types to include
+   * @param solution Optional predefined solution mapping
+   * @return Configured StonePuzzle instance
+   * 
+   * Example:
+   * ```ts
+   * const puzzle = PuzzleFactory.createCustomPuzzle(
+   * ['cavernstone', 'worldstone'],
+   * { cavernstone: 'symbolA', worldstone: 'symbolB' }
+   * );
+   * ```
    */
   static createCustomPuzzle(
     stones: Array<StoneType>,
-    solution?: Record<string, string>
+    solution?: Record<StoneType, Cavernstone | Godstone | Worldstone>
   ): StonePuzzle {
     const puzzle = new StonePuzzle();
     
