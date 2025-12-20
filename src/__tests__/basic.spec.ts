@@ -39,7 +39,7 @@ describe("basic test", () => {
     const totalSymbols = disc.symbols.length;
     let solved = false;
     for (let i = 0; i < totalSymbols; i++) {
-      disc.rotate(1);
+      disc.rotate();
       if (puzzle.isSolved()) {
         solved = true;
       }

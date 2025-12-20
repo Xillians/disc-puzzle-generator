@@ -13,7 +13,7 @@ function main() {
     const disc = puzzle.getDisc(discType as StoneType);
     if (disc) {
       logger.info({ state: puzzle.getState() }, `Current state before rotating ${discType}`);
-      disc.rotate(1);
+      disc.rotate();
       logger.info({ state: puzzle.getState() }, `State after rotating ${discType}`);
     }
   }
@@ -22,6 +22,8 @@ function main() {
   logger.info("Now solving the puzzle using proper alignment:");
   puzzle.applySolution(); // This uses proper positioning logic
   logger.info({ state: puzzle.getState(), isSolved: puzzle.isSolved() }, "Puzzle solved!");
+
+  logger.info({ clues: puzzle.getCluesForSolution() }, "Final clues after solving the puzzle");
 }
 
 main();

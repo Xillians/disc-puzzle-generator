@@ -49,13 +49,13 @@ describe("Full test", () => {
     const totalSymbolsGod = godstone.symbols.length;
     const totalSymbolsWorld = worldstone.symbols.length;
     for (let i = 0; i < totalSymbolsCavern; i++) {
-      cavernstone.rotate(1);
+      cavernstone.rotate();
     }
     for (let i = 0; i < totalSymbolsGod; i++) {
-      godstone.rotate(1);
+      godstone.rotate();
     }
     for (let i = 0; i < totalSymbolsWorld; i++) {
-      worldstone.rotate(1);
+      worldstone.rotate();
     }
     const finalState = puzzle.getState();
     const initialStateDiscCavern = initialState.discs.find((d: any) => d.stoneType === 'cavernstone');
@@ -91,11 +91,11 @@ describe("Full test", () => {
     const totalSymbolsWorld = worldstone.symbols.length;
     let solved = false;
     for (let i = 0; i < totalSymbolsCavern; i++) {
-      cavernstone.rotate(1);
+      cavernstone.rotate();
       for (let j = 0; j < totalSymbolsGod; j++) {
-        godstone.rotate(1);
+        godstone.rotate();
         for (let k = 0; k < totalSymbolsWorld; k++) {
-          worldstone.rotate(1);
+          worldstone.rotate();
           if (puzzle.isSolved()) {
             solved = true;
             break;

@@ -46,13 +46,13 @@ describe("intermediate test", () => {
     const totalSymbolsGod = godstone.symbols.length;
     let solved = false;
     for (let i = 0; i < totalSymbolsCavern; i++) {
-      cavernstone.rotate(1);
+      cavernstone.rotate();
       if (puzzle.isSolved()) {
         solved = true;
       }
     }
     for (let i = 0; i < totalSymbolsGod; i++) {
-      godstone.rotate(1);
+      godstone.rotate();
       if (puzzle.isSolved()) {
         solved = true;
       }
@@ -77,7 +77,7 @@ describe("intermediate test", () => {
     
     // With position mapping, we just need to test if any rotation results in a solvable state
     for (let i = 0; i < totalSymbolsCavern; i++) {
-      cavernstone.rotate(1);
+      cavernstone.rotate();
       
       // Apply the solution using the new position mapping logic
       puzzle.applySolution();
